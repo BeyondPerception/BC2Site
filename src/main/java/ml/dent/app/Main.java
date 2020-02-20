@@ -5,12 +5,27 @@ import java.io.IOException;
 
 import ml.dent.config.Configuration;
 import ml.dent.config.Constants;
+import ml.dent.net.NetworkServer;
 
 public class Main {
 	public void launch() {
 //		printLogo();
 		Configuration config = setupConfig();
 		if (config == null) {
+			System.exit(1);
+		}
+
+		startServer();
+	}
+
+	public void startServer() {
+		NetworkServer server = new NetworkServer(Constants.DEFAULT_PORT);
+		try {
+			server.bind();
+		} catch (InterruptedException e) {
+			System.out.println("Failed to start the site");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			System.exit(1);
 		}
 	}
