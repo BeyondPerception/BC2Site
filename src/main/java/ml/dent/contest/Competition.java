@@ -2,6 +2,7 @@ package ml.dent.contest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import ml.dent.config.Configuration;
 import ml.dent.user.Team;
@@ -32,5 +33,18 @@ public class Competition {
 
 	public void setConfig(Configuration config) {
 		this.config = config;
+	}
+
+	public Set<Division> getDivisions() {
+		return teams.keySet();
+	}
+
+	public void addTeam(Team team, Division div) {
+		if (teams.containsKey(div)) {
+			teams.get(div).add(team);
+		} else {
+			teams.put(div, new ArrayList<Team>());
+			teams.get(div).add(team);
+		}
 	}
 }
